@@ -376,8 +376,8 @@ pub fn create_credential(
                 let (credential_signature, signature_correctness_proof, delta) =
                     CryptoIssuer::sign_credential_with_revoc(
                         &cred_request.entropy()?,
-                        &cred_request.blinded_ms,
-                        &cred_request.blinded_ms_correctness_proof,
+                        &cred_request.blinded_ls,
+                        &cred_request.blinded_ls_correctness_proof,
                         cred_offer.nonce.as_native(),
                         cred_request.nonce.as_native(),
                         &credential_values,
@@ -420,8 +420,8 @@ pub fn create_credential(
             _ => {
                 let (signature, correctness_proof) = CryptoIssuer::sign_credential(
                     &cred_request.entropy()?,
-                    &cred_request.blinded_ms,
-                    &cred_request.blinded_ms_correctness_proof,
+                    &cred_request.blinded_ls,
+                    &cred_request.blinded_ls_correctness_proof,
                     cred_offer.nonce.as_native(),
                     cred_request.nonce.as_native(),
                     &credential_values,

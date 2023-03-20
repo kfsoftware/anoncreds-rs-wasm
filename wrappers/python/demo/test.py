@@ -11,7 +11,7 @@ from anoncreds import (
     PresentationRequest,
     Presentation,
     PresentCredentials,
-    MasterSecret,
+    LinkSecret,
     RevocationRegistryDefinition,
     Schema,
 )
@@ -41,13 +41,13 @@ cred_def, cred_def_pvt, key_proof = CredentialDefinition.create(
     rev_reg_init_list,
 ) = RevocationRegistryDefinition.create(cred_def_id, cred_def, "default", "CL_ACCUM", 100)
 
-master_secret = MasterSecret.create()
-master_secret_id = "my id"
+link_secret = LinkSecret.create()
+link_secret_id = "my id"
 
 cred_offer = CredentialOffer.create(schema_id, cred_def_id, key_proof)
 
 cred_req, cred_req_metadata = CredentialRequest.create(
-    None, cred_def, master_secret, master_secret_id, cred_offer
+    None, cred_def, link_secret, link_secret_id, cred_offer
 )
 
 issuer_rev_index = 1
@@ -70,7 +70,7 @@ cred, _rev_reg_updated, _rev_delta = Credential.create(
     ),
 )
 
-cred_received = cred.process(cred_req_metadata, master_secret, cred_def, rev_reg_def)
+cred_received = cred.process(cred_req_metadata, link_secret, cred_def, rev_reg_def)
 
 timestamp = int(time())
  
@@ -106,7 +106,7 @@ present_creds.add_attributes(
 )
  
 presentation = Presentation.create(
-    pres_req, present_creds, {}, master_secret, {schema_id: schema}, {cred_def_id: cred_def}
+    pres_req, present_creds, {}, link_secret, {schema_id: schema}, {cred_def_id: cred_def}
 )
 
 # verified = presentation.verify(
@@ -135,7 +135,7 @@ presentation = Presentation.create(
 #     cred_received, "reft", reveal=True, timestamp=timestamp, rev_state=rev_state
 # )
 # presentation_2 = Presentation.create(
-#     pres_req, present_creds, {}, master_secret, [schema], [cred_def]
+#     pres_req, present_creds, {}, link_secret, [schema], [cred_def]
 # )
 # 
 # verified = presentation.verify(
