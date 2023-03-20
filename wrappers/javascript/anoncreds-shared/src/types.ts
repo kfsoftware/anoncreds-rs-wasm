@@ -1,19 +1,23 @@
 type ByteBufferOptions = {
-  len: number
+  length: number
   data: Uint8Array
 }
 
 export class ByteBuffer {
-  public len: number
+  public length: number
   public data: Uint8Array
 
-  public constructor({ data, len }: ByteBufferOptions) {
+  public constructor({ data, length: len }: ByteBufferOptions) {
     this.data = data
-    this.len = len
+    this.length = len
   }
 
   public static fromUint8Array(data: Uint8Array): ByteBuffer {
-    return new ByteBuffer({ data, len: data.length })
+    return new ByteBuffer({ data, length: data.length })
+  }
+
+  public toBuffer(): Buffer {
+    return Buffer.from(this.data, this.length)
   }
 }
 
