@@ -18,9 +18,11 @@ crate-type = ["staticlib", "rlib", "cdylib"]
 
 [features]
 default = ["ffi", "logger", "zeroize"]
-ffi = ["ffi-support"]
+ffi = ["ffi-support", "non_wasm"]
 logger = ["env_logger"]
 vendored = ["openssl", "openssl/vendored"]
+wasm = ["ursa/portable_wasm", "zeroize"]
+non_wasm = ["ursa/cl_native", "ursa/serde"]
 
 [dependencies]
 bs58 = "0.4.0"
@@ -36,13 +38,17 @@ serde_json = { version = "1.0.94", features = ["raw_value"]}
 sha2 = "0.10.6"
 tempfile = "3.4.0"
 thiserror = "1.0.39"
-ursa = { version = "0.3.7", default-features = false, features = ["cl_native", "serde"] }
-zeroize = { version = "1.5.7", optional = true, features = ["zeroize_derive"] }
+zeroize = { version = "=1.4", optional = true, features = ["zeroize_derive"] }
 
 # We add the openssl dependency here because ursa does not expose a vendored openssl feature
 # Since we use "cl_native" as a feature, which uses openssl, we can add a vendored build with 
 # the new exposed "vendored" feature
 openssl = { version = "0.10.45", optional = true }
+
+[dependencies.ursa]
+git = "https://github.com/hyperledger/ursa.git"
+version = "0.3.7"
+default-features = false
 
 [profile.release]
 lto = true
