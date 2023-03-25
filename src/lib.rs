@@ -28,4 +28,7 @@ mod utils;
 #[cfg(feature = "ffi")]
 mod ffi;
 
+#[cfg(feature = "wasm")]
+mod wasm;
+
 pub mod data_types;
