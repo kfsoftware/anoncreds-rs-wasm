@@ -10,6 +10,10 @@ repository = "https://github.com/hyperledger/anoncreds-rs/"
 categories = ["authentication", "cryptography"]
 keywords = ["hyperledger", "ssi", "verifiable", "credentials"]
 
+[[bin]]
+name = "anoncreds"
+path = "./src/main.rs"
+
 [lib]
 name = "anoncreds"
 path = "src/lib.rs"
@@ -35,8 +39,8 @@ serde_json = { version = "1.0.94", features = ["raw_value"]}
 sha2 = "0.10.6"
 tempfile = "3.4.0"
 thiserror = "1.0.39"
-ursa = { version = "0.3.7", default-features = false, features = ["cl_native", "serde"] }
-zeroize = { version = "1.5.7", optional = true, features = ["zeroize_derive"] }
+ursa = { git = "https://github.com/hyperledger/ursa.git", version = "0.3.7", default-features = false, features = ["serde", "portable"] }
+zeroize = { version = "=1.4", optional = true, features = ["zeroize_derive"] }
 
 # We add the openssl dependency here because ursa does not expose a vendored openssl feature
 # Since we use "cl_native" as a feature, which uses openssl, we can add a vendored build with 

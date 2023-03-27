@@ -26,6 +26,6 @@ pub use services::*;
 mod utils;
 
 #[cfg(feature = "ffi")]
-mod ffi;
+pub mod ffi;
 
 pub mod data_types;
