@@ -51,6 +51,7 @@ openssl = { version = "0.10.45", optional = true }
 
 [dependencies.ursa]
 git = "https://github.com/hyperledger/ursa.git"
+rev = "390f004e3e91f1257da4bbcd6bc2d72f67b62c0f"
 version = "0.3.7"
 default-features = false
 
