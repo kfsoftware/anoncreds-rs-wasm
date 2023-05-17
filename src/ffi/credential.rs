@@ -167,8 +167,8 @@ pub extern "C" fn anoncreds_encode_credential_attributes(
     })
 }
 
-#[no_mangle]
-pub extern "C" fn anoncreds_process_credential(
+#[wasm_bindgen(js_name = anoncredsProcessCredential)]
+pub fn anoncreds_process_credential(
     cred: ObjectHandle,
     cred_req_metadata: ObjectHandle,
     link_secret: FfiStr,
